@@ -32,6 +32,7 @@ export const appRoutes: Routes = [
   { path: '', component: HomeComponent, data: { title: 'Home' } },
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'user-account', component: UserAccountComponent},
   {
     path: 'guide/getting-started',
     component: GettingStartedComponent,

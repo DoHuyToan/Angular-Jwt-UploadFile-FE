@@ -13,6 +13,7 @@ export class AuthService {
   // Khai báo biến API_LOCAL
   private API_SIGNUP = environment.API_LOCAL + 'signup';
   private API_SIGNIN = environment.API_LOCAL + 'signin';
+  data: boolean;
   // Muốn liên kết với nhau p thông qua HttpClient của Angular mới gọi đc các method của FE để ghép nối
   constructor(private http: HttpClient) { }
   // Trước khi triển khai ta p có Model(SignUpForm) để hứng dữ liệu (qua kiểu Json), FE hứng giống hệt BE.
@@ -24,6 +25,12 @@ export class AuthService {
   }
   signIn(signInForm: SignInForm): Observable<JwtReponse>{
     return this.http.post<JwtReponse>(this.API_SIGNIN, signInForm);
+  }
+  setData(data){
+    this.data = data;
+  }
+  getData(): boolean{
+    return this.data;
   }
 
 }
