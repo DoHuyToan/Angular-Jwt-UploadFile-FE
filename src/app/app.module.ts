@@ -27,12 +27,22 @@ import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from './pages/form-login/login/login.component';
 import { UserAccountComponent } from './pages/form-login/user-account/user-account.component';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment.prod';
+import { UploadAvatarComponent } from './upload/upload-avatar/upload-avatar.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { UploadFileComponent } from './upload/upload-file/upload-file.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { ChangeAvatarComponent } from './pages/form-login/change-avatar/change-avatar.component';
+import {httpInterceptorProviders} from './security/auth.interceptor';
 
 export const appRoutes: Routes = [
   { path: '', component: HomeComponent, data: { title: 'Home' } },
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
   { path: 'user-account', component: UserAccountComponent},
+  { path: 'change-avatar', component: ChangeAvatarComponent},
   {
     path: 'guide/getting-started',
     component: GettingStartedComponent,
@@ -41,7 +51,8 @@ export const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, GettingStartedComponent, RegisterComponent, LoginComponent, UserAccountComponent],
+  // tslint:disable-next-line:max-line-length
+  declarations: [AppComponent, HomeComponent, GettingStartedComponent, RegisterComponent, LoginComponent, UserAccountComponent, UploadAvatarComponent, UploadFileComponent, ChangeAvatarComponent],
   imports: [
     FormsModule,
     MatInputModule,
@@ -55,11 +66,14 @@ export const appRoutes: Routes = [
     MatSlideToggleModule,
     MatButtonModule,
     BrowserAnimationsModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     NavBarModule, FooterModule,
     NgxAudioPlayerModule,
-    RouterModule.forRoot(appRoutes, {useHash: false}), MatFormFieldModule, ReactiveFormsModule
+    // tslint:disable-next-line:max-line-length
+    RouterModule.forRoot(appRoutes, {useHash: false}), MatFormFieldModule, ReactiveFormsModule, MatProgressSpinnerModule, MatProgressBarModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {
